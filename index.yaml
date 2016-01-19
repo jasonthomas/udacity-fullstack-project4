@@ -104,3 +104,8 @@ indexes:
   properties:
   - name: typeOfSession
   - name: date
+
+- kind: Session
+  properties:
+  - name: typeOfSession
+  - name: startTime
