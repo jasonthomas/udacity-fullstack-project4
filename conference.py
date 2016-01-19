@@ -839,6 +839,30 @@ class ConferenceApi(remote.Service):
                    sessions]
         )
 
+    @endpoints.method(message_types.VoidMessage, SessionForms,
+                      path='getCustomQueryTask3',
+                      http_method='GET', name='getCustomQueryTask3')
+    def getCustomQueryTask3(self, request):
+        """Custom Query Task 3 """
+
+        before = datetime.strptime("19:00", "%H:%M").time()
+
+        filtered = []
+        sessions = Session.query(Session.typeOfSession != 'workshop')
+        # we can't have more than one filter here since
+        # "Only one inequality filter per query is supported."
+        # sessions = sessions.filter(Session.startTime < before)
+
+        # filter in memory using for loop
+        for session in sessions:
+            if session.startTime < before:
+                filtered.append(session)
+
+        return SessionForms(
+            items=[self._copySessionToForm(sess) for sess in
+                   filtered]
+        )
+
 # - - - Featured Speaker - - - - - - - - - - - - - - - - -
     @endpoints.method(CONF_GET_REQUEST, StringMessage,
                       path='getFeaturedSpeaker', http_method='GET',
