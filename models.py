@@ -124,7 +124,6 @@ class ConferenceQueryForms(messages.Message):
 class Session(ndb.Model):
     """Session -- Session object"""
     name = ndb.StringProperty(required=True)
-    wsck = ndb.StringProperty(required=True)
     highlights = ndb.StringProperty()
     speaker = ndb.StringProperty()
     duration = ndb.IntegerProperty()
@@ -152,7 +151,7 @@ class SessionForms(messages.Message):
 
 class Wishlist(ndb.Model):
     """Wishlist -- Profile session wishlist object"""
-    sessionKeys = ndb.StringProperty(repeated=True)
+    sessionKeys = ndb.KeyProperty(repeated=True)
 
 
 class WishlistForm(messages.Message):
