@@ -58,6 +58,14 @@ A wishlist for a Profile is created only when the user adds a session to the Wis
 addSessionToWishlist - Creates and adds sessions to Wishlist. Returns current sessions in Wishlist.
 deleteSessionInWishlist - Deletes session from Wishlist. Returns current sesions in Wishlist.
 
+### Design Choices
+
+I felt that Wishlist should be it's own Entity and be a child of Profile.
+
+The folowing represnts the Wishlist class which inherits ndb.Model:
+```
+    sessionKeys = ndb.KeyProperty(repeated=True) # I've used KeyProperty type here as to reference Profile's key. This is a repeated field which means we can store multiple values and stored as a list.
+```
 
 ## Task 3
 Indexes were creating automatically locally and populated in index.yaml. Deploying to app engine populated the indexs in Datestore.
